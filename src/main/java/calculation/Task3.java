@@ -6,8 +6,6 @@ public class Task3 implements EquationsSolver, IterationCalculator {
   private double startValue;
   private double left = 1.5;
   private double right = 2.5;
-  private double minOfFirstDerivative = 5.1875;
-  private double maxOfSecondDerivative = 13.5;
   private double q;
 
 
@@ -20,7 +18,7 @@ public class Task3 implements EquationsSolver, IterationCalculator {
   @Override
   public double findSolution() {
     double result = startValue;
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < calculateNumberOfIterations(); i++) {
       result = recursiveStep(result);
       System.out.println("Value at " + (1 + i) + " step: " + result);
     }
@@ -30,7 +28,7 @@ public class Task3 implements EquationsSolver, IterationCalculator {
   @Override
   public int calculateNumberOfIterations() {
     return 1 + (int) Math.floor(
-        Math.log(Math.log(Math.abs(right - left) / accuracy) / Math.log(1 / q) + 1) / Math.log(2));
+        Math.log(Math.log(Math.abs(right - left) / ((1-q)*accuracy)) / Math.log(1 / q)));
   }
 
   private double recursiveStep(double x) {
@@ -38,6 +36,6 @@ public class Task3 implements EquationsSolver, IterationCalculator {
   }
 
   private void calculateQ() {
-    q = maxOfSecondDerivative * Math.abs(right - left) / (2 * minOfFirstDerivative);
+    q = 0.169;
   }
 }
