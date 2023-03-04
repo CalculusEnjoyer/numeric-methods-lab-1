@@ -1,5 +1,8 @@
 package calculation;
 
+import lombok.Data;
+
+@Data
 public class Task2 implements EquationsSolver, IterationCalculator {
 
   private double accuracy;
